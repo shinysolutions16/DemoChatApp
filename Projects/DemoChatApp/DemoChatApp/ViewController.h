@@ -11,6 +11,7 @@
 
 @interface ViewController : UIViewController<MGCollapsingHeaderDelegate, UITableViewDelegate, UITableViewDataSource>{
     NSMutableArray *messageArray;
+    NSMutableArray *dataArray;
 }
 
 @property (weak, nonatomic) IBOutlet MGCollapsingHeaderView *callapsingHeaderView;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerTop;
 
 @property (nonatomic, retain) NSMutableArray *messageArray;
+@property (nonatomic, strong) NSMutableArray *chatArray;
 
 @end
 

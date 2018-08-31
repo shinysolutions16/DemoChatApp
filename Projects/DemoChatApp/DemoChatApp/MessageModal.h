@@ -10,7 +10,7 @@
 
 @interface MessageModal : NSObject
 
-@property(weak, nonatomic) NSString *message;
-@property(weak, nonatomic) NSString *type;
+@property(nonatomic, copy) NSString *message;
+@property(nonatomic, copy) NSString *type;
 
 @end

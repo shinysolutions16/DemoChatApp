@@ -17,6 +17,7 @@
 @implementation ViewController
 
 @synthesize messageArray;
+@synthesize chatArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,8 +26,7 @@
     [self.callapsingHeaderView setDelegate:self];
     [self.callapsingHeaderView setCollapsingConstraint:self.heightCollapsingHeader];
     
-    [self.tableviewChat setDelegate:self];
-    [self.tableviewChat setDataSource:self];
+    dataArray = [[NSMutableArray alloc] initWithObjects:@"hi", @"hi", nil];
     
     [self prepareData];
 }
@@ -56,6 +56,7 @@
     messageModal.message = @"Hi";
     messageModal.type = @"Sent";
     [self.messageArray addObject:messageModal];
+    [self.chatArray addObject:messageModal];
     
     NSLog(@"prepareData %lu", (unsigned long)[self.messageArray count]);
     
@@ -63,49 +64,59 @@
     messageModal.message = @"Hi";
     messageModal.type = @"Receive";
     [self.messageArray addObject:messageModal];
+    [self.chatArray addObject:messageModal];
     
     messageModal = [[MessageModal alloc] init];
     messageModal.message = @"I am Marie Jackson";
     messageModal.type = @"Sent";
     [self.messageArray addObject:messageModal];
+    [self.chatArray addObject:messageModal];
     
     messageModal = [[MessageModal alloc] init];
     messageModal.message = @"I am Will smith";
     messageModal.type = @"Receive";
     [self.messageArray addObject:messageModal];
-    
+    [self.chatArray addObject:messageModal];
 }
 
 #pragma mark -
 #pragma mark Tableview data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfRowsInSection %lu", (unsigned long)self.messageArray.count);
-    return self.messageArray.count;
+    NSLog(@"numberOfRowsInSection");
+    return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ChatTableViewCell *cell = (ChatTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ChatTableViewCell"];
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ChatTableViewCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-        
+    NSLog(@"cellForRowAtIndexPath");
+    ChatTableViewCell *cell = (ChatTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ChatTableViewCell" forIndexPath:indexPath];
+    
+    NSLog(@"cellForRowAtIndexPath - indexpath");
+    MessageModal *messageModal = (MessageModal *) [self.chatArray objectAtIndex:indexPath.row];
+    if (indexPath.row == 0) {
+        [cell.right_chat setHidden:YES];
+        [cell.left_chat setHidden:NO];
+        [cell.left_chat setTitle:@"TEST" forState:UIControlStateNormal];
+    }else {
+        [cell.right_chat setHidden:NO];
+        [cell.left_chat setHidden:YES];
+        [cell.right_chat setTitle:@"TEST" forState:UIControlStateNormal];
     }
-    MessageModal *messageModal = (MessageModal *)[self.messageArray objectAtIndex:indexPath.row];
-    if ([messageModal.type isEqualToString:@"Sent"]) {
-        UIImageView *labelBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"left_chat.9"]];
-        [cell.labelMessage addSubview:labelBackground];
-        cell.labelMessage.backgroundColor = [UIColor clearColor];
-    } else if ([messageModal.type isEqualToString:@"Receive"]){
-        UIImageView *labelBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_chat.9"]];
-        [cell.labelMessage addSubview:labelBackground];
-        cell.labelMessage.backgroundColor = [UIColor clearColor];
-    }
-    cell.labelMessage.text   = messageModal.message;
+    NSLog(@"cellForRowAtIndexPath - background");
+    
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 100.0;
 }
 
 #pragma mark -
