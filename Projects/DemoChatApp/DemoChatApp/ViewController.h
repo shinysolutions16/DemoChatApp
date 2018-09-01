@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MGCollapsingHeaderView.h"
 
-@interface ViewController : UIViewController<MGCollapsingHeaderDelegate, UITableViewDelegate, UITableViewDataSource>{
+@interface ViewController : UIViewController<MGCollapsingHeaderDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate>{
     NSMutableArray *messageArray;
     NSMutableArray *dataArray;
 }

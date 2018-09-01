@@ -19,6 +19,8 @@
 		86C9014D21387A5800A7EBB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C9014C21387A5800A7EBB3 /* main.m */; };
 		86C9015721387A5800A7EBB3 /* DemoChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C9015621387A5800A7EBB3 /* DemoChatAppTests.m */; };
 		86C9016221387A5800A7EBB3 /* DemoChatAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C9016121387A5800A7EBB3 /* DemoChatAppUITests.m */; };
+		86CBA739213B216F00DAEDA1 /* AGChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CBA737213B216F00DAEDA1 /* AGChatViewController.m */; };
+		86CBA73A213B216F00DAEDA1 /* AGChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86CBA738213B216F00DAEDA1 /* AGChatViewController.xib */; };
 		FF3A18DC4EDAD6A94B93C3D2 /* libPods-DemoChatAppUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6360711042E01B6113D265DF /* libPods-DemoChatAppUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,9 @@
 		86C9015D21387A5800A7EBB3 /* DemoChatAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoChatAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C9016121387A5800A7EBB3 /* DemoChatAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoChatAppUITests.m; sourceTree = "<group>"; };
 		86C9016321387A5800A7EBB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86CBA736213B216F00DAEDA1 /* AGChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChatViewController.h; sourceTree = "<group>"; };
+		86CBA737213B216F00DAEDA1 /* AGChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChatViewController.m; sourceTree = "<group>"; };
+		86CBA738213B216F00DAEDA1 /* AGChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGChatViewController.xib; sourceTree = "<group>"; };
 		B00B1340E700403AD420E737 /* libPods-DemoChatAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DemoChatAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0AE005CF8BA4959384F63D7 /* Pods-DemoChatAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoChatAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DemoChatAppTests/Pods-DemoChatAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB31DA943B2ECF87A956CC47 /* Pods-DemoChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DemoChatApp/Pods-DemoChatApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +129,7 @@
 		86C9013C21387A5800A7EBB3 /* DemoChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				86CBA735213B216F00DAEDA1 /* AGChatView */,
 				86C9013D21387A5800A7EBB3 /* AppDelegate.h */,
 				86C9013E21387A5800A7EBB3 /* AppDelegate.m */,
 				86C9014021387A5800A7EBB3 /* ViewController.h */,
@@ -157,6 +163,16 @@
 				86C9016321387A5800A7EBB3 /* Info.plist */,
 			);
 			path = DemoChatAppUITests;
+			sourceTree = "<group>";
+		};
+		86CBA735213B216F00DAEDA1 /* AGChatView */ = {
+			isa = PBXGroup;
+			children = (
+				86CBA736213B216F00DAEDA1 /* AGChatViewController.h */,
+				86CBA737213B216F00DAEDA1 /* AGChatViewController.m */,
+				86CBA738213B216F00DAEDA1 /* AGChatViewController.xib */,
+			);
+			path = AGChatView;
 			sourceTree = "<group>";
 		};
 		9699A4F2766FAF1F9B77FB52 /* Frameworks */ = {
@@ -297,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86CBA73A213B216F00DAEDA1 /* AGChatViewController.xib in Resources */,
 				86C9014A21387A5800A7EBB3 /* LaunchScreen.storyboard in Resources */,
 				86C9014721387A5800A7EBB3 /* Assets.xcassets in Resources */,
 				86C9014521387A5800A7EBB3 /* Main.storyboard in Resources */,
@@ -475,6 +492,7 @@
 				86C44A1F2139BBF500B15B98 /* ChatTableViewCell.m in Sources */,
 				86C44A222139C29A00B15B98 /* MessageModal.m in Sources */,
 				86C9014D21387A5800A7EBB3 /* main.m in Sources */,
+				86CBA739213B216F00DAEDA1 /* AGChatViewController.m in Sources */,
 				86C9013F21387A5800A7EBB3 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
