@@ -16,7 +16,7 @@
 @property (nonatomic) NSMutableArray *allMessages;
 //Subview(s)
 @property (nonatomic) UIView *viewBar;
-@property (nonatomic) UITextView *messageTV;
+@property (nonatomic) UITextField *messageTV;
 @property (nonatomic) UIButton *sendButton;
 @end
 
@@ -50,7 +50,7 @@
     viewB.layer.borderWidth = 1.0;
     viewB.layer.borderColor = [Rgb2UIColor(204, 204, 204) CGColor];
     
-    self.messageTV = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, screenWidth-80, 30)];
+    self.messageTV = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, screenWidth-80, 30)];
     self.messageTV.layer.cornerRadius = 5.0;
     self.messageTV.clipsToBounds = YES;
     self.messageTV.layer.borderColor = [[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor];
@@ -97,6 +97,18 @@
 - (UIView *)inputAccessoryView{
     
     return self.viewBar;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
 }
 
 #pragma mark -
@@ -157,13 +169,40 @@
 #pragma mark Text field delegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     NSLog(@"textFieldDidBeginEditing");
+    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     return NO;
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    CGPoint pointInTable = [textField.superview convertPoint:textField.frame.origin toView:self.tableviewChat];
+    CGPoint contentOffset = self.tableviewChat.contentOffset;
+    
+    contentOffset.y = (pointInTable.y - textField.inputAccessoryView.frame.size.height);
+    
+    NSLog(@"contentOffset is: %@", NSStringFromCGPoint(contentOffset));
+    
+    [self.tableviewChat setContentOffset:contentOffset animated:YES];
+    
+    return YES;
+}
+
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    if ([textField.superview.superview isKindOfClass:[UITableViewCell class]])
+    {
+        UITableViewCell *cell = (UITableViewCell*)textField.superview.superview;
+        NSIndexPath *indexPath = [self.tableviewChat indexPathForCell:cell];
+        
+        [self.tableviewChat scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:TRUE];
+    }
+    
+    return YES;
 }
 
 #pragma mark --

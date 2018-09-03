@@ -12,6 +12,7 @@
 @interface ViewController : UIViewController<MGCollapsingHeaderDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate>{
     NSMutableArray *messageArray;
     NSMutableArray *dataArray;
+    CGFloat initialTVHeight;
 }
 
 @property (weak, nonatomic) IBOutlet MGCollapsingHeaderView *callapsingHeaderView;
