@@ -18,6 +18,7 @@
 @property (nonatomic) UIView *viewBar;
 @property (nonatomic) UITextField *messageTV;
 @property (nonatomic) UIButton *sendButton;
+@property (nonatomic) CGPoint kContentOffset;
 @end
 
 @implementation ViewController
@@ -173,12 +174,16 @@
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@"textFieldShouldReturn");
     return NO;
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    CGPoint pointInTable = [textField.superview convertPoint:textField.frame.origin toView:self.tableviewChat];
+    NSLog(@"textFieldShouldBeginEditing");
+    CGPoint pointInTable = [textField.superview convertPoint:textField.inputAccessoryView.frame.origin toView:self.tableviewChat];
+    NSLog(@"textFieldShouldBeginEditing x:%f y:%f", pointInTable.x, pointInTable.y);
     CGPoint contentOffset = self.tableviewChat.contentOffset;
+    self.kContentOffset = contentOffset;
     
     contentOffset.y = (pointInTable.y - textField.inputAccessoryView.frame.size.height);
     
@@ -192,10 +197,14 @@
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    NSLog(@"textFieldShouldEndEditing");
     [textField resignFirstResponder];
+    
+    [self.tableviewChat setContentOffset:self.kContentOffset];
     
     if ([textField.superview.superview isKindOfClass:[UITableViewCell class]])
     {
+        NSLog(@"textFieldShouldEndEditing");
         UITableViewCell *cell = (UITableViewCell*)textField.superview.superview;
         NSIndexPath *indexPath = [self.tableviewChat indexPathForCell:cell];
         
@@ -413,10 +422,21 @@
 - (void)scrollToTheBottom:(BOOL)animated
 {
     NSLog(@"scrollToTheBottom");
+    /*
     if (self.allMessages.count>0)
     {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.allMessages.count-1 inSection:0];
+        
+         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.allMessages.count-1 inSection:0];
         [self.tableviewChat scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+     
+    }
+    */
+    /*
+    [self.tableviewChat setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+     */
+    if (self.tableviewChat.contentSize.height > self.tableviewChat.frame.size.height) {
+        CGPoint offset = CGPointMake(0, self.tableviewChat.contentSize.height - self.tableviewChat.frame.size.height);
+        [self.tableviewChat setContentOffset:offset animated:animated];
     }
 }
 
