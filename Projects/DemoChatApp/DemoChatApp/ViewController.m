@@ -599,7 +599,7 @@
     [self.tableviewChat reloadData];
     [self scrollToTheBottom:YES];
     
-    [self.messageTV resignFirstResponder];
+    //[self.messageTV resignFirstResponder];
     self.messageTV.text = @"";
 }
 
